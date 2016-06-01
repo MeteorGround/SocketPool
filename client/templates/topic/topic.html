@@ -1,0 +1,11 @@
+<template name="topic">
+    <form id="createRoom">
+        <div class="form-group">
+            <label>Room Name</label>
+            <input type="text" class="form-control" id="roomName">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+    {{#each getRooms.rooms}}
+    <a href="/room/{{getRooms.topic}}/{{_id}}">{{label}}</a> {{/each}}
+</template>
