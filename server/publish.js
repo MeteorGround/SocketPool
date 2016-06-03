@@ -5,7 +5,3 @@ Meteor.publish('topics', function() {
 Meteor.publish('rooms', function() {
   return Rooms.find();
 })
-
-Meteor.publish('roomdata', function() {
-  return Roomdata.find();
-})

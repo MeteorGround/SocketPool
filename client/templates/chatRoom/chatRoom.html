@@ -4,8 +4,12 @@
       <div class="col-md-4">
         <div class="well">
           <h3>Users in this room</h3>
-          {{getData}}
-          <ul class="list-group" id="users"></ul>
+          {{#each getData}}
+          <h4 id="roomName">{{cleanRoom}}</h4>
+          {{/each}}
+          <ul class="list-group" id="users">
+            {{getMsg}}
+          </ul>
         </div>
       </div>
       <div class="col-md-8">
