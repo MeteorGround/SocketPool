@@ -1,5 +1,5 @@
 {
-  "name": "Pool",
+  "name": "SocketPool",
   "private": true,
   "scripts": {
     "start": "meteor run"
