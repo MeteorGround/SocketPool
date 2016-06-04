@@ -1,39 +1,54 @@
 <template name="chatRoom">
-  {{#if Template.subscriptionsReady}}
-  <div class="container">
-    <div id="messageArea" class="row">
-      <div class="col-md-4">
-        <div class="well">
-          <h3>Users in this room</h3>
-          <h4 id="roomName">{{getData.cleanRoom}}</h4>
-          <ul class="list-group" id="users">
+    {{#if Template.subscriptionsReady}}
+    
+    <div class="container">
+        {{#if display}}
+        <div class="vote-box">
+            <button class="yes btn btn-success btn-xs">Yes (1)</button>
+            <button class="no btn btn-success btn-xs">No (0)</button>
+        </div>
+        {{/if}}
+        <div id="messageArea" class="row">
+            <div class="ds col-md-4">
+                <div class="well">
+                    <h3>Users in this room</h3>
+                    <h4 id="roomName">{{getData.cleanRoom}}</h4>
+                    <ul class="list-group" id="users">
+                        {{#each getData.connectedUsers}}
+                        <li style="margin: 10px">{{this}}
+                            <button class="vote-kick btn btn-danger btn-xs">Vote Kick</button>
+                        </li>
+                        {{/each}}
+                    </ul>
 
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="chat" id="chat">
-          {{#each getData.roomMsg}}
-          <div>
-            <div class="name">
-              {{sender}}, {{date}}
+                </div>
+
             </div>
-            <div class="name">
-              <span>{{message}}</span>
+            <div class="col-md-8">
+                <div class="chat" id="chat">
+                    {{#each getData.roomMsg}}
+                    <div>
+                        <div class="name">
+                            {{sender}}, {{date}}
+                        </div>
+                        <div class="name">
+                            <span>{{message}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{#if isLogged}}
+                <form id="messageForm">
+                    <div class="form-group">
+                        <label>Enter Message</label>
+                        <textarea class="form-control" id="message"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+                {{/if}}
             </div>
-          </div>
-          {{/each}}
         </div>
-        <form id="messageForm">
-          <div class="form-group">
-            <label>Enter Message</label>
-            <textarea class="form-control" id="message"></textarea>
-            <br>
-            <button type="submit" class="btn btn-primary">Send</button>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
-  {{/if}}
+    {{/if}}
 </template>

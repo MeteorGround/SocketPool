@@ -14,6 +14,7 @@ Template.room.helpers({
     return roomsName;
   }
 })
+
 Template.room.events({
   'submit #create-new-room': function(e){
     e.preventDefault();
@@ -21,7 +22,7 @@ Template.room.events({
     if(Rooms.findOne({"roomName": roomName.split(' ').join('-')})){
       alert('Already Added bb, sir thawa.')
     }else{
-      Rooms.insert({"roomName": roomName.split(' ').join('-'), "roomTopic": FlowRouter.getParam('topicName')})
+      Rooms.insert({"roomName": roomName.split(' ').join('-'), "roomTopic": FlowRouter.getParam('topicName'), bannedUser: [],connectedUsers: [], "voteState": {state: "off", yes: 0, no: 0, kicked: '', roomWatchers: []}})
     }
   }
 })
