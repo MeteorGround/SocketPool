@@ -1,11 +1,11 @@
 <template name="chatRoom">
     {{#if Template.subscriptionsReady}}
-    
+
     <div class="container">
         {{#if display}}
         <div class="vote-box">
-            <button class="yes btn btn-success btn-xs">Yes (1)</button>
-            <button class="no btn btn-success btn-xs">No (0)</button>
+            <button class="yes btn btn-success btn-xs">Yes ( {{getData.voteState.yes}} )</button>
+            <button class="no btn btn-success btn-xs">No ( {{getData.voteState.no}} )</button>
         </div>
         {{/if}}
         <div id="messageArea" class="row">
