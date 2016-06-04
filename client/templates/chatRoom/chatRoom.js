@@ -1,14 +1,20 @@
-Meteor.subscribe('rooms');
+// Meteor.subscribe('rooms');
+
+Template.chatRoom.onCreated(function(){
+  var self = this;
+  self.autorun(function(){
+    self.subscribe('rooms');
+  })
+})
 
 Template.chatRoom.helpers({
   getData(){
-    let roomName = Rooms.find({"roomName": FlowRouter.getParam('roomName')}).fetch();
-    roomName.map((index) =>  index.cleanRoom = index["roomName"].split('-').join(' '));
-    return roomName;
-  },
-  getMsg(){
-    let getMsg = Rooms.find({"roomName": FlowRouter.getParam('roomName')}).fetch();
-    return "sdds"
+    let roomName = Rooms.findOne({"roomName": FlowRouter.getParam('roomName')});
+    // roomName.map((index) =>  index.cleanRoom = index["roomName"].split('-').join(' '));
+    // if(roomName){
+      roomName['cleanRoom'] = roomName['roomName'].split('-').join(' ')
+      return roomName;
+    // }
   }
 })
 

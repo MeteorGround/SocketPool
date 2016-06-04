@@ -1,20 +1,28 @@
 <template name="chatRoom">
+  {{#if Template.subscriptionsReady}}
   <div class="container">
     <div id="messageArea" class="row">
       <div class="col-md-4">
         <div class="well">
           <h3>Users in this room</h3>
-          {{#each getData}}
-          <h4 id="roomName">{{cleanRoom}}</h4>
-          {{/each}}
+          <h4 id="roomName">{{getData.cleanRoom}}</h4>
           <ul class="list-group" id="users">
-            {{getMsg}}
+
           </ul>
         </div>
       </div>
       <div class="col-md-8">
         <div class="chat" id="chat">
-
+          {{#each getData.roomMsg}}
+          <div>
+            <div class="name">
+              {{sender}}, {{date}}
+            </div>
+            <div class="name">
+              <span>{{message}}</span>
+            </div>
+          </div>
+          {{/each}}
         </div>
         <form id="messageForm">
           <div class="form-group">
@@ -27,4 +35,5 @@
       </div>
     </div>
   </div>
+  {{/if}}
 </template>

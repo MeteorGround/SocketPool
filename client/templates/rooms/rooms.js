@@ -1,4 +1,11 @@
-Meteor.subscribe('rooms');
+// Meteor.subscribe('rooms');
+
+Template.room.onCreated(function(){
+  var self = this;
+  self.autorun(function(){
+    self.subscribe('rooms');
+  })
+})
 
 Template.room.helpers({
   getRooms(){
