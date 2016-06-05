@@ -12,17 +12,19 @@ Template.chatRoom.helpers({
         let roomName = Rooms.findOne({
             "roomName": FlowRouter.getParam('roomName')
         });
-        roomName['cleanRoom'] = roomName['roomName'].split('-').join(' ')
-
-        if(Meteor.userId()){ 
-          if (roomName.connectedUsers.indexOf(Meteor.user().username) === -1) {
-              Rooms.update(Rooms.findOne({
-                  "roomName": FlowRouter.getParam('roomName')
-              })._id, {
-                  $push: {
-                      connectedUsers: Meteor.user().username
-                  }
-              });
+        // Cuz Of findOne Sucks
+        if(roomName){
+          roomName['cleanRoom'] = roomName['roomName'].split('-').join(' ')
+          if(Meteor.userId()){
+            if (roomName.connectedUsers.indexOf(Meteor.user().username) === -1) {
+                Rooms.update(Rooms.findOne({
+                    "roomName": FlowRouter.getParam('roomName')
+                })._id, {
+                    $push: {
+                        connectedUsers: Meteor.user().username
+                    }
+                });
+            }
           }
         }
         return roomName;
@@ -31,13 +33,15 @@ Template.chatRoom.helpers({
         let roomName = Rooms.findOne({
             "roomName": FlowRouter.getParam('roomName')
         });
-        return !!Meteor.user() && (roomName.bannedUser.indexOf(Meteor.userId()) == -1)
+        if(roomName)
+          return !!Meteor.user() && (roomName.bannedUser.indexOf(Meteor.userId()) == -1)
     },
     display() {
         let roomName = Rooms.findOne({
             "roomName": FlowRouter.getParam('roomName')
         });
-        return (roomName.voteState.state == 'on') ? true : false
+        if(roomName)
+          return (roomName.voteState.state == 'on') ? true : false
     }
 })
 
