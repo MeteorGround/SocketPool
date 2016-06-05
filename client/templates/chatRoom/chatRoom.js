@@ -24,7 +24,6 @@ Template.chatRoom.helpers({
                 }
             });
         }
-
         return roomName;
     },
     isLogged() {
@@ -33,11 +32,11 @@ Template.chatRoom.helpers({
         });
         return !!Meteor.user() && (roomName.bannedUser.indexOf(Meteor.userId()) == -1)
     },
-    display(){
-      let roomName = Rooms.findOne({
-          "roomName": FlowRouter.getParam('roomName')
-      });
-      return (roomName.voteState.state == 'on') ? true : false
+    display() {
+        let roomName = Rooms.findOne({
+            "roomName": FlowRouter.getParam('roomName')
+        });
+        return (roomName.voteState.state == 'on') ? true : false
     }
 })
 
@@ -46,15 +45,15 @@ Template.chatRoom.events({
         const room = Rooms.findOne({
             "roomName": FlowRouter.getParam('roomName')
         });
-        if(room.voteState.roomWatchers.indexOf(Meteor.user().username) == -1){
-          Rooms.update(room._id, {
-              $inc: {
-                  "voteState.yes": 1
-              },
-              $push: {
-                "voteState.roomWatchers": Meteor.user().username
-              }
-          })
+        if (room.voteState.roomWatchers.indexOf(Meteor.user().username) == -1) {
+            Rooms.update(room._id, {
+                $inc: {
+                    "voteState.yes": 1
+                },
+                $push: {
+                    "voteState.roomWatchers": Meteor.user().username
+                }
+            })
         }
 
     },
@@ -62,21 +61,21 @@ Template.chatRoom.events({
         const room = Rooms.findOne({
             "roomName": FlowRouter.getParam('roomName')
         });
-        if(room.voteState.roomWatchers.indexOf(Meteor.user().username) == -1){
-          Rooms.update(room._id, {
-              $inc: {
-                  "voteState.no": 1
-              },
-              $push: {
-                "voteState.roomWatchers": Meteor.user().username
-              }
-          })
+        if (room.voteState.roomWatchers.indexOf(Meteor.user().username) == -1) {
+            Rooms.update(room._id, {
+                $inc: {
+                    "voteState.no": 1
+                },
+                $push: {
+                    "voteState.roomWatchers": Meteor.user().username
+                }
+            })
         }
 
     },
     'click .vote-kick': function(e) {
         const usersOnline = $('#users li').size(),
-        kicked = this.toString();
+            kicked = this.toString();
         if (usersOnline < 3) {
             $('.ds').append('<div class="sirsir alert alert-warning">Rah atbi maymknch tkcik ok by bb.</div>');
             setTimeout(function() {
@@ -103,17 +102,19 @@ Template.chatRoom.events({
                     const room = Rooms.findOne({
                         "roomName": FlowRouter.getParam('roomName')
                     });
-                    if( room.voteState.yes > room.voteState.no ){ // HI bchwiya bb li zarbo mato.
-                      // do stuff
-                      let idKicked = Meteor.users.findOne({'username': kicked})._id
-                      Rooms.update(room._id, {
-                          $push: {
-                              bannedUser: idKicked
+                    if (room.voteState.yes > room.voteState.no) { // HI bchwiya bb li zarbo mato.
+                        // do stuff
+                        let idKicked = Meteor.users.findOne({
+                            'username': kicked
+                        })._id
+                        Rooms.update(room._id, {
+                            $push: {
+                                bannedUser: idKicked
 
-                          }
-                      });
-                    }else{
-                      console.log("No bb mera okhra");
+                            }
+                        });
+                    } else {
+                        console.log("No bb mera okhra");
                     }
                     Rooms.update(room._id, {
                         $set: {

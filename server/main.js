@@ -8,5 +8,4 @@ Meteor.startup(() => {
             "topicName": topic
         }))
     }
-    
 });

@@ -1,6 +1,5 @@
 <template name="chatRoom">
-    {{#if Template.subscriptionsReady}}
-
+    {{#if Template.subscriptionsReady}} {{#if getData}}
     <div class="container">
         {{#if display}}
         <div class="vote-box">
@@ -50,5 +49,16 @@
             </div>
         </div>
     </div>
+    {{else}}
+    <div class="message_body">
+        <h1>Page Not Found</h1>
+        <span>We searched everywhere but couldn't find the page you were looking for.</span>
+        <div class="redirect">
+          <span>
+            <a href="/">Take me Home</a>
+          </span>
+        </div>
+    </div>
+    {{/if}}
     {{/if}}
 </template>
