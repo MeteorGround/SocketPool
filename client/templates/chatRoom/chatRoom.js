@@ -14,15 +14,16 @@ Template.chatRoom.helpers({
         });
         roomName['cleanRoom'] = roomName['roomName'].split('-').join(' ')
 
-        if (roomName.connectedUsers.indexOf(Meteor.user().username) === -1) {
-            Rooms.update(Rooms.findOne({
-                "roomName": FlowRouter.getParam('roomName')
-            })._id, {
-                $push: {
-                    connectedUsers: Meteor.user().username
-
-                }
-            });
+        if(Meteor.userId()){ 
+          if (roomName.connectedUsers.indexOf(Meteor.user().username) === -1) {
+              Rooms.update(Rooms.findOne({
+                  "roomName": FlowRouter.getParam('roomName')
+              })._id, {
+                  $push: {
+                      connectedUsers: Meteor.user().username
+                  }
+              });
+          }
         }
         return roomName;
     },
