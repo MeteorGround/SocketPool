@@ -1,11 +1,27 @@
 <template name="home">
-  {{#if Template.subscriptionsReady}}
-{{#each getTopics}}
-<h4><a href="/topic/{{topicName}}">{{topicName}}</a></h4>
-{{/each}}
-<div class="container x">
+{{#if Template.subscriptionsReady}}
 
-</div>
+  <div class="row">
+    {{#each getTopics}}
+    <div class="topics col-md-6">
+      <div class="topic row">
+        <div class="col-md-2">
+          <img class="logos" src="http://lorempicsum.com/futurama/100/100/1" alt="">
+        </div>
+        <div class="col-md-7">
+          <h4 class="topic-name"><a href="/topic/{{topicName}}">{{topicName}}</a></h4>
+          <div class="topic-info">
+            <p>{{topicName}} Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </div>
+        <div class="lastcol col-md-3">
+          <a href="/topic/{{topicName}}">Chat Here</a>
+          <a href="#">Follow</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 {{/if}}
 
 </template>

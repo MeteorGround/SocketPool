@@ -23,6 +23,7 @@ Template.room.events({
       alert('Already Added bb, sir thawa.')
     }else{
       Rooms.insert({"roomName": roomName.split(' ').join('-'), "roomTopic": FlowRouter.getParam('topicName'), bannedUser: [],connectedUsers: [], "voteState": {state: "off", yes: 0, no: 0, kicked: '', roomWatchers: []}})
+      FlowRouter.go('/'+ roomName.split(' ').join('-'));
     }
   }
 })

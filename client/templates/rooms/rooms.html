@@ -1,11 +1,9 @@
 <template name="room">
+<form id="create-new-room">
+  <input type="text" class="form-control" name="roomName" id="roomName">
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
 {{#each getRooms}}
 <h4><a href="/{{roomName}}">{{cleanRoom}}</a></h4>
 {{/each}}
-<div class="container">
-  <form id="create-new-room">
-    <input type="text" class="form-control" name="roomName" id="roomName">
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
-</div>
 </template>
